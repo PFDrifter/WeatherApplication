@@ -135,8 +135,41 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDataSour
         if todaysWeather.currentTitle == "Please choose a location to view the weather" {
             todaysWeather.setTitle("Current forcast for this location unavilable", forState: .Disabled)
         }
+        
         //Force the UITableView to reload its data to reflect the week forcast
+        addIcons()
         weekForcastTable.reloadData()
+    }
+    
+    //Add emoji Icons to represent weather
+    func addIcons() {
+        for entry: WeatherEntry in weekForcast {
+            if entry.title.lowercaseString.containsString("rain") ||
+                entry.title.lowercaseString.containsString("drizzle") ||
+                entry.title.lowercaseString.containsString("showers") {
+                entry.title = "🌧 " + entry.title
+            }
+            else if entry.title.lowercaseString.containsString("storm") ||
+                entry.title.lowercaseString.containsString("thunder") {
+                entry.title = "⛈ " + entry.title
+            }
+            else if entry.title.lowercaseString.containsString("sun") &&
+                entry.title.lowercaseString.containsString("cloud") {
+                entry.title = "⛅ " + entry.title
+            }
+            else if entry.title.lowercaseString.containsString("cloud") ||
+                entry.title.lowercaseString.containsString("overcast") {
+                entry.title = "☁️ " + entry.title
+            }
+            else if entry.title.lowercaseString.containsString("cloud") ||
+                entry.title.lowercaseString.containsString("overcast") {
+                entry.title = "☁️ " + entry.title
+            }
+            else if entry.title.lowercaseString.containsString("sun") ||
+                entry.title.lowercaseString.containsString("clear") {
+                entry.title = "☀️ " + entry.title
+            }
+        }
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
